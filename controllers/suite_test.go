@@ -20,10 +20,10 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/envtest"
 
-	etcdv1alpha1 "github.com/improbable-eng/etcd-cluster-operator/api/v1alpha1"
-	"github.com/improbable-eng/etcd-cluster-operator/internal/etcd"
-	"github.com/improbable-eng/etcd-cluster-operator/internal/test"
-	"github.com/improbable-eng/etcd-cluster-operator/internal/test/crontest"
+	etcdv1alpha1 "github.com/lacework/etcd-cluster-operator/api/v1alpha1"
+	"github.com/lacework/etcd-cluster-operator/internal/etcd"
+	"github.com/lacework/etcd-cluster-operator/internal/test"
+	"github.com/lacework/etcd-cluster-operator/internal/test/crontest"
 )
 
 type controllerSuite struct {
@@ -158,7 +158,7 @@ func (s *controllerSuite) setupTest(t *testing.T, etcdAPI etcd.APIBuilder) (tear
 
 // triggerReconcile forces a Reconcile by making a trivial change to the annotations
 // of the supplied object.
-// A work around for https://github.com/improbable-eng/etcd-cluster-operator/issues/76
+// A work around for https://github.com/lacework/etcd-cluster-operator/issues/76
 func (s *controllerSuite) triggerReconcile(obj runtime.Object) error {
 	m := meta.NewAccessor()
 	updated := obj.DeepCopyObject()

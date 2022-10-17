@@ -8,4 +8,4 @@ spec:
     source:
       clusterURL: http://my-cluster:2379
     destination:
-      objectURL: "s3://foo-bucket/snapshot-{{ .UID }}.db"
+      objectURLTemplate: "s3://etcd-operator-backup-test/snapshot-{{ .UID }}.db?region=us-west-2"

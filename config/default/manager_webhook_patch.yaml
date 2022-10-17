@@ -2,12 +2,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: controller-manager
-  namespace: system
+  namespace: cert-manager
 spec:
   template:
     spec:
+      imagePullSecrets:
+        - name: lacework-docker
       containers:
       - name: manager
+        imagePullPolicy: Always
         ports:
         - containerPort: 9443
           name: webhook-server

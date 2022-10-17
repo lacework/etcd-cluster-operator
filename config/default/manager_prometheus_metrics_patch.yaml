@@ -3,16 +3,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: controller-manager
-  namespace: system
+  namespace: cert-manager
 spec:
   template:
     metadata:
       annotations:
         prometheus.io/scrape: 'true'
     spec:
+      imagePullSecrets:
+        - name: lacework-docker
       containers:
       # Expose the prometheus metrics on default port
       - name: manager
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
           name: metrics

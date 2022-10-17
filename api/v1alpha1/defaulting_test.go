@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"sigs.k8s.io/controller-runtime/pkg/webhook"
 
-	"github.com/improbable-eng/etcd-cluster-operator/api/v1alpha1"
+	"github.com/lacework/etcd-cluster-operator/api/v1alpha1"
 )
 
 func TestEtcdCluster(t *testing.T) {

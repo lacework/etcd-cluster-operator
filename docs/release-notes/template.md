@@ -11,7 +11,7 @@ Repeat this for each patch release.
 Changelogs should be ordered from newest to oldest, with the most recent patch appearing first.
 The version should link to the github tagged release.
 -->
-## Changelog for [${patch-version}](https://github.com/improbable-eng/etcd-cluster-operator/releases/${patch-version}) - ${date}
+## Changelog for [${patch-version}](https://github.com/lacework/etcd-cluster-operator/releases/${patch-version}) - ${date}
 
 <!--
 Notable changes include new functionality, features, or API additions.
@@ -25,7 +25,7 @@ The summary should begin with a link to the ticket tracking the change, or a PR 
 The description should link to any key issues/pull requests that contributed to the feature's implementation.
 Repeat this for each notable change.
 -->
-* [#${issue-ref-1}](https://github.com/improbable-eng/etcd-cluster-operator/issues/${issue-ref-1}) **${issue-summary-1}**
+* [#${issue-ref-1}](https://github.com/lacework/etcd-cluster-operator/issues/${issue-ref-1}) **${issue-summary-1}**
 
    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam lacinia eros vel posuere gravida. 
    Pellentesque in tempus risus, at dictum lorem. 
@@ -40,7 +40,7 @@ Repeat this for each notable change.
    Duis eu dictum felis. 
    Nunc vitae justo et quam sagittis scelerisque.
    
-* [#${issue-ref-2}](https://github.com/improbable-eng/etcd-cluster-operator/issues/${issue-ref-2}) **${issue-summary-2}**
+* [#${issue-ref-2}](https://github.com/lacework/etcd-cluster-operator/issues/${issue-ref-2}) **${issue-summary-2}**
 
    Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
    Nulla eget eleifend tellus. 
@@ -60,7 +60,7 @@ This could include bugfixes, documentation updates, or minor features.
 <!--
 Just include a summary here, no detailed description required.
 -->
-* [#${issue-ref-1}](https://github.com/improbable-eng/etcd-cluster-operator/issues/${issue-ref-1}) **${issue-summary-1}**
-* [#${issue-ref-2}](https://github.com/improbable-eng/etcd-cluster-operator/issues/${issue-ref-2}) **${issue-summary-2}**
-* [#${issue-ref-3}](https://github.com/improbable-eng/etcd-cluster-operator/issues/${issue-ref-3}) **${issue-summary-3}**
+* [#${issue-ref-1}](https://github.com/lacework/etcd-cluster-operator/issues/${issue-ref-1}) **${issue-summary-1}**
+* [#${issue-ref-2}](https://github.com/lacework/etcd-cluster-operator/issues/${issue-ref-2}) **${issue-summary-2}**
+* [#${issue-ref-3}](https://github.com/lacework/etcd-cluster-operator/issues/${issue-ref-3}) **${issue-summary-3}**
 

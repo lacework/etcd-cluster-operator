@@ -489,7 +489,7 @@ And we do not know of any Etcd deadlock conditions.
 So the Liveness Probe seems unnecessary.
 
 And furthermore [Liveness Probes may cause more problems than they solve](https://srcco.de/posts/kubernetes-liveness-probes-are-dangerous.html).
-In [our experiments](https://github.com/improbable-eng/etcd-cluster-operator/pull/83#issuecomment-561111653),
+In [our experiments](https://github.com/lacework/etcd-cluster-operator/pull/83#issuecomment-561111653),
 using the a [Liveness Probe based on the Etcd health endpoint, as configured by Kubeadm](https://github.com/kubernetes/kubernetes/pull/81385),
 the Liveness Probe regularly failed:
 during scaling operations due to cluster leader elections, and
@@ -497,7 +497,7 @@ at times of high network latency between Etcd peers.
 This caused Etcd containers to be restarted, which made the situation even worse.
 
 If you disagree with this or if you find a valid use-case for Liveness Probes,
-please [create an issue](https://github.com/improbable-eng/etcd-cluster-operator/issues).
+please [create an issue](https://github.com/lacework/etcd-cluster-operator/issues).
 
 ### Why aren't there Readiness Probes for the Etcd Pods?
 
@@ -512,4 +512,4 @@ A client connecting to the Service for these pods would have to deal with empty 
 because all the Endpoints for the service would be removed when the Readiness Probe failed.
 
 If you disagree with this or if you find a valid use-case for Readiness Probes,
-please [create an issue](https://github.com/improbable-eng/etcd-cluster-operator/issues).
+please [create an issue](https://github.com/lacework/etcd-cluster-operator/issues).

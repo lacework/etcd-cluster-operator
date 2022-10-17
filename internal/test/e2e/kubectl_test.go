@@ -25,7 +25,7 @@ import (
 const (
 	testNameLabelKey = "e2e.etcd.improbable.io/test-name"
 	// The etcd image containing etcdctl
-	etcdctlImage = "quay.io/coreos/etcd:v3.3.18"
+	etcdctlImage = "quay.io/coreos/etcd"
 	// charSet defines the alphanumeric set for random string generation.
 	// These must encode to a single byte in UTF-8 for compatibility with the
 	// randomString() function.
@@ -150,7 +150,7 @@ func (k *kubectlContext) Exec(podName string, cmd ...string) (string, error) {
 
 // DryRun wraps `kubectl apply --server-dry-run', returning the unparsed output & any error that occurred.
 func (k *kubectlContext) DryRun(filename string) (string, error) {
-	out, err := k.do("apply", "--server-dry-run", "--output", "yaml", "--filename", filename)
+	out, err := k.do("apply", "--dry-run=server", "--output", "yaml", "--filename", filename)
 	return string(out), err
 }
 

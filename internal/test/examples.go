@@ -6,7 +6,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/utils/pointer"
 
-	etcdv1alpha1 "github.com/improbable-eng/etcd-cluster-operator/api/v1alpha1"
+	etcdv1alpha1 "github.com/lacework/etcd-cluster-operator/api/v1alpha1"
 )
 
 // ExampleEtcdCluster returns a valid example for testing purposes.

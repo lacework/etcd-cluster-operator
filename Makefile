@@ -6,7 +6,7 @@ SHELL := bash
 .DEFAULT_GOAL := help
 # The version which will be reported by the --version argument of each binary
 # and which will be used as the Docker image tag
-VERSION ?= $(shell git describe --tags)
+VERSION ?= $(shell git describe --always)
 
 # Set ARGS to specify extra go test arguments
 ARGS ?=
@@ -22,7 +22,7 @@ export BIN ?= ${CURDIR}/bin
 # Make sure BIN is on the PATH
 export PATH := $(BIN):$(PATH)
 
-GO_VERSION ?= 1.14
+GO_VERSION ?= 1.19
 # Look for a `go1.14` on the path but fall back to `go`.
 # Allows me to use `go get golang.org/dl/go1.14` without having to replace my OS
 # provided golang package.
@@ -31,7 +31,7 @@ GO := $(or $(shell which go${GO_VERSION}),$(shell which go))
 # Docker image configuration
 # Docker images are published to https://quay.io/repository/improbable-eng/etcd-cluster-operator
 DOCKER_TAG ?= ${VERSION}
-DOCKER_REPO ?= quay.io/improbable-eng
+DOCKER_REPO ?= lacework
 DOCKER_IMAGES ?= controller proxy backup-agent restore-agent
 DOCKER_IMAGE_NAME_PREFIX ?= etcd-cluster-operator-
 # The Docker image for the controller-manager which will be deployed to the cluster in tests
@@ -45,19 +45,19 @@ OS := $(shell ${GO} env GOOS)
 ARCH := $(shell ${GO} env GOARCH)
 
 # Kind
-KIND_VERSION := 0.7.0
+KIND_VERSION := 0.17.0
 KIND := ${BIN}/kind-${KIND_VERSION}
 K8S_CLUSTER_NAME := etcd-e2e
 
 # controller-tools
-CONTROLLER_GEN_VERSION := 0.2.5
-CONTROLLER_GEN := ${BIN}/controller-gen-0.2.5
+CONTROLLER_GEN_VERSION := 0.8.0
+CONTROLLER_GEN := ${BIN}/controller-gen-${CONTROLLER_GEN_VERSION}
 
 # Kustomize
-KUSTOMIZE_VERSION := 3.5.4
+KUSTOMIZE_VERSION := 4.5.7
 KUSTOMIZE_DOWNLOAD_URL := https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_${OS}_${ARCH}.tar.gz
 KUSTOMIZE_LOCAL_ARCHIVE := /tmp/kustomize_v${KUSTOMIZE_VERSION}_${OS}_${ARCH}.tar.gz
-KUSTOMIZE := ${BIN}/kustomize-3.5.4
+KUSTOMIZE := ${BIN}/kustomize-${KUSTOMIZE_VERSION}
 KUSTOMIZE_DIRECTORY_TO_EDIT := "config/test/e2e"
 KUSTOMIZE_DIRECTORY_TO_DEPLOY := "config/test/e2e"
 

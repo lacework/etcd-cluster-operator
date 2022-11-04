@@ -1,22 +1,26 @@
-# Default values for etcd-cluster-operator.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+controller:
+  image:
+    registry: docker.io
+    repository: lacework/etcd-cluster-operator-controller
+    pullPolicy: IfNotPresent
+    tag: a1da112
 
-replicaCount: 1
+proxy:
+  image:
+    registry: docker.io
+    repository: lacework/etcd-cluster-operator-proxy
+    pullPolicy: IfNotPresent
+    tag: a1da112
 
-image:
-  repository: nginx
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+imagePullSecrets:
+  - "lacework-docker"
 
-imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: true
+  create: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.

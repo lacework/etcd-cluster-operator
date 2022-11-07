@@ -2,14 +2,16 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "etcd-cluster-operator.fullname" . }}
+  namespace: {{ .Release.Namespace }}
   labels:
+    control-plane: proxy
     {{- include "etcd-cluster-operator.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
+    - port: 80
+      targetPort: 8080
       protocol: TCP
       name: http
   selector:
-    {{- include "etcd-cluster-operator.selectorLabels" . | nindent 4 }}
+    control-plane: proxy

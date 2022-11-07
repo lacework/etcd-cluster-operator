@@ -13,7 +13,7 @@ proxy:
     tag: a1da112
 
 imagePullSecrets:
-  - "lacework-docker"
+  - name: "lacework-docker"
 
 nameOverride: ""
 fullnameOverride: ""

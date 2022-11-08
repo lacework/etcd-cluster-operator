@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name:
+  namespace: cert-manager
+spec:
+  commonName: {{ include "etcd-cluster-operator.fullname" . }}-manager.{{ .Release.Namespace }}.svc
+  dnsNames:
+  - {{ include "etcd-cluster-operator.fullname" . }}-manager.{{ .Release.Namespace }}.svc
+  - {{ include "etcd-cluster-operator.fullname" . }}-manager.{{ .Release.Namespace }}.svc.cluster.local
+  issuerRef:
+    kind: Issuer
+    name: selfsigned-issuer
+  secretName: webhook-server-cert

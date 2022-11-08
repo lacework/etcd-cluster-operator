@@ -1,7 +1,7 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: manager-webhook
+  name: webhook-server-cert
   namespace: {{ .Release.Namespace }}
 spec:
   commonName: {{ include "etcd-cluster-operator.fullname" . }}-manager.{{ .Release.Namespace }}.svc

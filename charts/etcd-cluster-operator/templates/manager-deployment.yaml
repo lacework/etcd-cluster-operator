@@ -26,6 +26,7 @@ spec:
         args:
         - --enable-leader-election
         - --proxy-url={{ include "etcd-cluster-operator.fullname" . }}-proxy.{{ .Release.Namespace }}.svc
+        - --etcd-repository=gcr.io/etcd-development/etc
         image: "{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.controller.image.pullPolicy }}
         name: manager

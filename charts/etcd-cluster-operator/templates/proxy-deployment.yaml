@@ -27,9 +27,6 @@ spec:
         image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.proxy.image.pullPolicy }}
         resources:
-          limits:
-            cpu: 100m
-            memory: 50Mi
           requests:
             cpu: 100m
             memory: 50Mi

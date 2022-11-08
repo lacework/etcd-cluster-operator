@@ -9,6 +9,6 @@ spec:
   - {{ include "etcd-cluster-operator.fullname" . }}-manager.{{ .Release.Namespace }}.svc
   - {{ include "etcd-cluster-operator.fullname" . }}-manager.{{ .Release.Namespace }}.svc.cluster.local
   issuerRef:
-    kind: ClusterIssuer
+    kind: Issuer
     name: selfsigned-issuer
   secretName: webhook-server-cert

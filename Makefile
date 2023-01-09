@@ -8,6 +8,8 @@ SHELL := bash
 # and which will be used as the Docker image tag
 VERSION ?= $(shell git describe --tags)
 
+VERSION ?= latest
+
 # Set ARGS to specify extra go test arguments
 ARGS ?=
 

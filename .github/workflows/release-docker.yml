@@ -27,6 +27,6 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: Build and push Docker image
         run: make docker-build docker-push DOCKER_REPO=lacwork/$GITHUB_REPOSITORY
-      
+
 
 

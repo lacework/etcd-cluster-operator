@@ -26,7 +26,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: Build and push Docker image
-        run: make docker-build docker-push DOCKER_REPO=$GITHUB_REPOSITORY
+        run: make docker-build docker-push
 
 
 

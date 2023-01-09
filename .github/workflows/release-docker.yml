@@ -2,11 +2,15 @@ name: Release Docker images
 on:
   push:
     branches:
-      - master
+      - 'master'
     tags:
       - "*"
-jobs:
+  workflow_call:
   pull_request:
+    branches:
+      - 'master'
+jobs:
+  build-and-push:
     runs-on: ubuntu-16.04
     steps:
       - uses: actions/checkout@v2
@@ -16,11 +20,11 @@ jobs:
       - uses: actions/setup-go@v2
         with:
           go-version: '^1.14.3'
-      - name: Login to Docker
-        uses: azure/docker-login@v1
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
         with:
-          login-server: docker.pkg.github.com
-          username: $GITHUB_ACTOR
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: Build and push Docker image
-        run: make docker-build docker-push DOCKER_REPO=docker.pkg.github.com/$GITHUB_REPOSITORY
+        run: make docker-build docker-push DOCKER_REPO=lacwork/$GITHUB_REPOSITORY
+

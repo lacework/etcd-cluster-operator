@@ -6,7 +6,7 @@ SHELL := bash
 .DEFAULT_GOAL := help
 # The version which will be reported by the --version argument of each binary
 # and which will be used as the Docker image tag
-VERSION ?= $(shell git describe --tags)
+#VERSION ?= $(shell git describe --tags)
 
 VERSION ?= latest
 

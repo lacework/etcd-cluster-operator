@@ -25,10 +25,10 @@ import (
 	"k8s.io/utils/pointer"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	etcdv1alpha1 "github.com/improbable-eng/etcd-cluster-operator/api/v1alpha1"
-	"github.com/improbable-eng/etcd-cluster-operator/internal/etcd"
-	"github.com/improbable-eng/etcd-cluster-operator/internal/test"
-	"github.com/improbable-eng/etcd-cluster-operator/internal/test/try"
+	etcdv1alpha1 "github.com/lacework/etcd-cluster-operator/api/v1alpha1"
+	"github.com/lacework/etcd-cluster-operator/internal/etcd"
+	"github.com/lacework/etcd-cluster-operator/internal/test"
+	"github.com/lacework/etcd-cluster-operator/internal/test/try"
 )
 
 type AlwaysFailEtcdAPI struct{}

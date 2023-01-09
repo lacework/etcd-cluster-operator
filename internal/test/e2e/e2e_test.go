@@ -25,9 +25,9 @@ import (
 	"k8s.io/utils/pointer"
 
 	semver "github.com/coreos/go-semver/semver"
-	etcdv1alpha1 "github.com/improbable-eng/etcd-cluster-operator/api/v1alpha1"
-	"github.com/improbable-eng/etcd-cluster-operator/internal/test"
-	"github.com/improbable-eng/etcd-cluster-operator/internal/test/try"
+	etcdv1alpha1 "github.com/lacework/etcd-cluster-operator/api/v1alpha1"
+	"github.com/lacework/etcd-cluster-operator/internal/test"
+	"github.com/lacework/etcd-cluster-operator/internal/test/try"
 )
 
 const (
@@ -100,7 +100,7 @@ func TestE2E(t *testing.T) {
 	// with the remaining tests.
 	// Because the Etcd mutating and validating webhook service may not
 	// immediately be responding.
-	kubectl = kubectl.WithDefaultNamespace("default")
+	kubectl = kubectl.WithDefaultNamespace("eco-system")
 	var out string
 	err := try.Eventually(func() (err error) {
 		out, err = kubectl.DryRun(sampleClusterPath)
@@ -236,7 +236,7 @@ func backupTests(t *testing.T, kubectl *kubectlContext) {
 	t.Log("A proxy backup can be taken.")
 	backupFileName := fmt.Sprintf("backup-%s.db", randomString(8))
 	backup := test.ExampleEtcdBackup(cluster.Namespace)
-	backup.Spec.Destination.ObjectURLTemplate = fmt.Sprintf("s3://backups.test.improbable.io/%s?endpoint=http://minio.minio.svc:9000&disableSSL=true&s3ForcePathStyle=true&region=eu-west-2", backupFileName)
+	backup.Spec.Destination.ObjectURLTemplate = fmt.Sprintf("s3://burhan-test/%s?endpoint=http://172.17.0.6:9000&disableSSL=true&s3ForcePathStyle=true&region=eu-west-2", backupFileName)
 	err = kubectl.ApplyObject(backup)
 	require.NoError(t, err)
 

@@ -11,7 +11,7 @@ import (
 	"k8s.io/client-go/tools/record"
 	"sigs.k8s.io/controller-runtime/pkg/client/apiutil"
 
-	etcdv1alpha1 "github.com/improbable-eng/etcd-cluster-operator/api/v1alpha1"
+	etcdv1alpha1 "github.com/lacework/etcd-cluster-operator/api/v1alpha1"
 )
 
 var (

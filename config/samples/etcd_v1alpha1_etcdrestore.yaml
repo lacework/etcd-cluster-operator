@@ -6,7 +6,7 @@ spec:
   source:
     # See https://gocloud.dev/howto/blob/#s3-compatible for details on how this query string works.
     # And https://godoc.org/gocloud.dev/aws#ConfigFromURLParams
-    objectURL: s3://foo-bucket/snapshot.sb
+    objectURL: 's3://etcd-operator-backup-test/snapshot.db?region=us-west-2'
   clusterTemplate:
     clusterName: my-cluster
     spec:

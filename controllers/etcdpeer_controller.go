@@ -27,9 +27,9 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 	"sigs.k8s.io/controller-runtime/pkg/source"
 
-	etcdv1alpha1 "github.com/improbable-eng/etcd-cluster-operator/api/v1alpha1"
-	"github.com/improbable-eng/etcd-cluster-operator/internal/etcd"
-	"github.com/improbable-eng/etcd-cluster-operator/internal/etcdenvvar"
+	etcdv1alpha1 "github.com/lacework/etcd-cluster-operator/api/v1alpha1"
+	"github.com/lacework/etcd-cluster-operator/internal/etcd"
+	"github.com/lacework/etcd-cluster-operator/internal/etcdenvvar"
 )
 
 // EtcdPeerReconciler reconciles a EtcdPeer object

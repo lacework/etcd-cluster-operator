@@ -24,9 +24,9 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 
-	etcdv1alpha1 "github.com/improbable-eng/etcd-cluster-operator/api/v1alpha1"
-	"github.com/improbable-eng/etcd-cluster-operator/internal/etcd"
-	"github.com/improbable-eng/etcd-cluster-operator/internal/reconcilerevent"
+	etcdv1alpha1 "github.com/lacework/etcd-cluster-operator/api/v1alpha1"
+	"github.com/lacework/etcd-cluster-operator/internal/etcd"
+	"github.com/lacework/etcd-cluster-operator/internal/reconcilerevent"
 )
 
 const (
@@ -177,7 +177,7 @@ func (a MembersByName) Less(i, j int) bool { return a[i].Name < a[j].Name }
 // cluster, and generates an Event to record that action.
 // TODO(wallrj) Consider removing a non-leader member to avoid disruptive
 // leader elections while scaling down.
-// See https://github.com/improbable-eng/etcd-cluster-operator/issues/97
+// See https://github.com/lacework/etcd-cluster-operator/issues/97
 func (r *EtcdClusterReconciler) removeMember(ctx context.Context, cluster *etcdv1alpha1.EtcdCluster, members []etcdclient.Member) (*reconcilerevent.MemberRemovedEvent, error) {
 	sortedMembers := append(members[:0:0], members...)
 	sort.Sort(sort.Reverse(MembersByName(sortedMembers)))

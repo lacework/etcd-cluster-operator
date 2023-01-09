@@ -12,11 +12,11 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	etcdv1alpha1 "github.com/improbable-eng/etcd-cluster-operator/api/v1alpha1"
-	"github.com/improbable-eng/etcd-cluster-operator/controllers"
-	"github.com/improbable-eng/etcd-cluster-operator/internal/etcd"
-	"github.com/improbable-eng/etcd-cluster-operator/version"
-	"github.com/improbable-eng/etcd-cluster-operator/webhooks"
+	etcdv1alpha1 "github.com/lacework/etcd-cluster-operator/api/v1alpha1"
+	"github.com/lacework/etcd-cluster-operator/controllers"
+	"github.com/lacework/etcd-cluster-operator/internal/etcd"
+	"github.com/lacework/etcd-cluster-operator/version"
+	"github.com/lacework/etcd-cluster-operator/webhooks"
 	"github.com/robfig/cron/v3"
 	// +kubebuilder:scaffold:imports
 )
@@ -71,7 +71,7 @@ func main() {
 		return
 	}
 	// TODO: Allow users to configure JSON logging.
-	// See https://github.com/improbable-eng/etcd-cluster-operator/issues/171
+	// See https://github.com/lacework/etcd-cluster-operator/issues/171
 	ctrl.SetLogger(zap.New(zap.UseDevMode(true)))
 
 	setupLog.Info(

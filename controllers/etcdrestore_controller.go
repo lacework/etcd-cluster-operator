@@ -21,8 +21,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 	"sigs.k8s.io/controller-runtime/pkg/source"
 
-	etcdv1alpha1 "github.com/improbable-eng/etcd-cluster-operator/api/v1alpha1"
-	"github.com/improbable-eng/etcd-cluster-operator/internal/reconcilerevent"
+	etcdv1alpha1 "github.com/lacework/etcd-cluster-operator/api/v1alpha1"
+	"github.com/lacework/etcd-cluster-operator/internal/reconcilerevent"
 )
 
 // EtcdRestoreReconciler reconciles a EtcdRestore object
@@ -403,6 +403,7 @@ func (r *EtcdRestoreReconciler) podForRestore(restore etcdv1alpha1.EtcdRestore, 
 			Containers: []corev1.Container{
 				{
 					Name:      restoreContainerName,
+					ImagePullPolicy: corev1.PullAlways,
 					Image:     r.RestorePodImage,
 					Args:      []string{},
 					Resources: *restore.Spec.ClusterTemplate.Spec.PodTemplate.Resources,
@@ -420,9 +421,10 @@ func (r *EtcdRestoreReconciler) podForRestore(restore etcdv1alpha1.EtcdRestore, 
 					},
 					// TODO: Add resource requests and affinity rules which
 					// match the eventual cluster peer pod.
-					// See https://github.com/improbable-eng/etcd-cluster-operator/issues/172
+					// See https://github.com/lacework/etcd-cluster-operator/issues/172
 				},
 			},
+			ImagePullSecrets: []corev1.LocalObjectReference{{Name: "lacework-docker"}},
 			// If we fail, we fail
 			RestartPolicy: corev1.RestartPolicyNever,
 		},

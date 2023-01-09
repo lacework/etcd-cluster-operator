@@ -19,8 +19,8 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	pb "github.com/improbable-eng/etcd-cluster-operator/api/proxy/v1"
-	"github.com/improbable-eng/etcd-cluster-operator/version"
+	pb "github.com/lacework/etcd-cluster-operator/api/proxy/v1"
+	"github.com/lacework/etcd-cluster-operator/version"
 )
 
 var (

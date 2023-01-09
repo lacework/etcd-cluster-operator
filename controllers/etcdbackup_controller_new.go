@@ -17,8 +17,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 
-	etcdv1alpha1 "github.com/improbable-eng/etcd-cluster-operator/api/v1alpha1"
-	"github.com/improbable-eng/etcd-cluster-operator/internal/reconcilerevent"
+	etcdv1alpha1 "github.com/lacework/etcd-cluster-operator/api/v1alpha1"
+	"github.com/lacework/etcd-cluster-operator/internal/reconcilerevent"
 )
 
 // EtcdBackupReconciler reconciles a EtcdBackup object
@@ -244,6 +244,7 @@ func podForBackup(backup *etcdv1alpha1.EtcdBackup, image, proxyURL, serviceAccou
 				{
 					Name:  "backup-agent",
 					Image: image,
+					ImagePullPolicy: corev1.PullAlways,
 					Args: []string{
 						"--proxy-url", proxyURL,
 						"--backup-url", objectURL.String(),
@@ -261,6 +262,7 @@ func podForBackup(backup *etcdv1alpha1.EtcdBackup, image, proxyURL, serviceAccou
 					},
 				},
 			},
+			ImagePullSecrets: []corev1.LocalObjectReference{{Name: "lacework-docker"}},
 			RestartPolicy: corev1.RestartPolicyNever,
 		},
 	}, nil

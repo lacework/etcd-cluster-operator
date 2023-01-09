@@ -22,7 +22,7 @@ export BIN ?= ${CURDIR}/bin
 # Make sure BIN is on the PATH
 export PATH := $(BIN):$(PATH)
 
-GO_VERSION ?= 1.14
+GO_VERSION ?= 1.17
 # Look for a `go1.14` on the path but fall back to `go`.
 # Allows me to use `go get golang.org/dl/go1.14` without having to replace my OS
 # provided golang package.
@@ -31,7 +31,7 @@ GO := $(or $(shell which go${GO_VERSION}),$(shell which go))
 # Docker image configuration
 # Docker images are published to https://quay.io/repository/improbable-eng/etcd-cluster-operator
 DOCKER_TAG ?= ${VERSION}
-DOCKER_REPO ?= quay.io/improbable-eng
+DOCKER_REPO ?= lacework
 DOCKER_IMAGES ?= controller proxy backup-agent restore-agent
 DOCKER_IMAGE_NAME_PREFIX ?= etcd-cluster-operator-
 # The Docker image for the controller-manager which will be deployed to the cluster in tests
@@ -46,12 +46,13 @@ ARCH := $(shell ${GO} env GOARCH)
 
 # Kind
 KIND_VERSION := 0.7.0
-KIND := ${BIN}/kind-${KIND_VERSION}
+# KIND := ${BIN}/kind-${KIND_VERSION}
+KIND := kind
 K8S_CLUSTER_NAME := etcd-e2e
 
 # controller-tools
-CONTROLLER_GEN_VERSION := 0.2.5
-CONTROLLER_GEN := ${BIN}/controller-gen-0.2.5
+CONTROLLER_GEN_VERSION := 1
+CONTROLLER_GEN := ${BIN}/controller-gen-1
 
 # Kustomize
 KUSTOMIZE_VERSION := 3.5.4
@@ -105,11 +106,12 @@ e2e-kind: docker-build kind-cluster kind-load deploy-e2e e2e
 .PHONY: e2e
 e2e: ## Run the end-to-end tests - uses the current KUBE_CONFIG and context
 e2e:
+	${GO} get -u golang.org/x/sys 
 	${GO} test -v -parallel ${TEST_PARALLEL_E2E} -timeout 20m ./internal/test/e2e --e2e-enabled --repo-root ${CURDIR} --output-directory ${E2E_ARTIFACTS_DIRECTORY} $(ARGS)
 
 .PHONY: manager
 manager: ## Build manager binary
-	${GO} build -o bin/manager -ldflags="-X 'github.com/improbable-eng/etcd-cluster-operator/version.Version=${VERSION}'" main.go
+	${GO} build -o bin/manager -ldflags="-X 'github.com/lacework/etcd-cluster-operator/version.Version=${VERSION}'" main.go
 
 # Use 'DISABLE_WEBHOOKS=1` to run the controller-manager without the
 # webhook server, and to skip the loading of webhook TLS keys, since these are
@@ -138,8 +140,8 @@ deploy-minio:
 
 .PHONY: deploy-cert-manager
 deploy-cert-manager: ## Deploy cert-manager in the configured Kubernetes cluster in ~/.kube/config
-	kubectl apply --validate=false --filename=https://github.com/jetstack/cert-manager/releases/download/v0.11.0/cert-manager.yaml
-	kubectl wait --for=condition=Available --timeout=300s apiservice v1beta1.webhook.cert-manager.io
+	kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.9.1/cert-manager.yaml
+#	kubectl wait --for=condition=Available --timeout=300s apiservice v1.webhook.cert-manager.io
 
 .PHONY: deploy-controller
 deploy-controller: ## Deploy controller in the configured Kubernetes cluster in ~/.kube/config
@@ -155,6 +157,7 @@ deploy: deploy-controller
 .PHONY: deploy-e2e
 deploy-e2e: ## Deploy the operator, including all dependencies needed to run E2E tests
 deploy-e2e: deploy-cert-manager deploy-minio deploy
+# deploy-e2e: deploy-minio deploy
 
 kustomize-edit-set-image-%: COMPONENT=$*
 kustomize-edit-set-image-%: ${KUSTOMIZE} FORCE
@@ -180,7 +183,9 @@ verify-protobuf-lint: ## Run protobuf static checks
 .PHONY: manifests
 manifests: ## Generate manifests e.g. CRD, RBAC etc.
 manifests: ${CONTROLLER_GEN}
-	$(CONTROLLER_GEN) $(CRD_OPTIONS) rbac:roleName=manager-role webhook paths="./..." output:crd:artifacts:config=config/crd/bases
+	$(CONTROLLER_GEN) rbac:roleName=manager-role crd webhook paths="./..." output:crd:artifacts:config=config/crd/bases
+	# $(CONTROLLER_GEN) $(CRD_OPTIONS) rbac:roleName=manager-role webhook paths="./..." output:crd:artifacts:config=config/crd/bases
+
 
 .PHONY: fmt
 fmt: ## Run go fmt against code
@@ -285,7 +290,8 @@ ${BIN}:
 ${CONTROLLER_GEN}: | ${BIN}
 # Prevents go get from modifying our go.mod file.
 # See https://github.com/kubernetes-sigs/kubebuilder/issues/909
-	cd /tmp; GOBIN=${BIN} GO111MODULE=on ${GO} get sigs.k8s.io/controller-tools/cmd/controller-gen@v${CONTROLLER_GEN_VERSION}
+	# cd /tmp; GOBIN=${BIN} GO111MODULE=on ${GO} install sigs.k8s.io/controller-tools/cmd/controller-gen@v${CONTROLLER_GEN_VERSION}
+	cd /tmp; GOBIN=${BIN} GO111MODULE=on ${GO} install sigs.k8s.io/controller-tools/cmd/controller-gen
 	mv ${BIN}/controller-gen ${CONTROLLER_GEN}
 
 ${KUSTOMIZE}: | ${BIN}

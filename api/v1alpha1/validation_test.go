@@ -7,8 +7,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"k8s.io/apimachinery/pkg/api/resource"
 
-	"github.com/improbable-eng/etcd-cluster-operator/api/v1alpha1"
-	"github.com/improbable-eng/etcd-cluster-operator/internal/test"
+	"github.com/lacework/etcd-cluster-operator/api/v1alpha1"
+	"github.com/lacework/etcd-cluster-operator/internal/test"
 )
 
 func TestEtcdCluster_ValidateCreate(t *testing.T) {
@@ -157,7 +157,7 @@ func TestEtcdCluster_ValidateUpdate(t *testing.T) {
 			err: "^Unsupported changes:",
 		},
 		{
-			// TODO Support pod annotation modification https://github.com/improbable-eng/etcd-cluster-operator/issues/109
+			// TODO Support pod annotation modification https://github.com/lacework/etcd-cluster-operator/issues/109
 			name: "ModifyPodSpecAnnotation",
 			modifier: func(o *v1alpha1.EtcdCluster) {
 				o.Spec.PodTemplate = &v1alpha1.EtcdPodTemplateSpec{
@@ -319,7 +319,7 @@ func TestEtcdPeer_ValidateUpdate(t *testing.T) {
 			err: `^Unsupported changes:`,
 		},
 		{
-			// TODO Support pod annotation modification https://github.com/improbable-eng/etcd-cluster-operator/issues/109
+			// TODO Support pod annotation modification https://github.com/lacework/etcd-cluster-operator/issues/109
 			name: "ModifyPodSpecAnnotation",
 			modifier: func(o *v1alpha1.EtcdPeer) {
 				o.Spec.PodTemplate = &v1alpha1.EtcdPodTemplateSpec{

@@ -6,9 +6,7 @@ SHELL := bash
 .DEFAULT_GOAL := help
 # The version which will be reported by the --version argument of each binary
 # and which will be used as the Docker image tag
-# VERSION ?= $(shell git describe --tags)
-VERSION = test
-
+VERSION ?= $(shell git describe --tags)
 
 # Set ARGS to specify extra go test arguments
 ARGS ?=

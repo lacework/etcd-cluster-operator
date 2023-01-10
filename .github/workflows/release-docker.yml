@@ -15,7 +15,6 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Install Go
-        working-directory: ~/go/src/github.com/lacework/etcd-cluster-operator
         run: |
           sudo rm -rf /usr/local/go
           curl -sSL "https://dl.google.com/go/go1.14.linux-amd64.tar.gz" -o /tmp/go.tar.gz

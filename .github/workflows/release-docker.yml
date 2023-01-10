@@ -11,7 +11,7 @@ on:
       - 'master'
 jobs:
   e2e:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-1604:201903-01
     steps:
       - name: Install Go
         run: |

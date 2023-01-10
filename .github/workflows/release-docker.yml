@@ -20,8 +20,8 @@ jobs:
           curl -sSL "https://dl.google.com/go/go1.14.linux-amd64.tar.gz" -o /tmp/go.tar.gz
           echo "08df79b46b0adf498ea9f320a0f23d6ec59e9003660b4c9c1ce8e5e2c6f823ca  /tmp/go.tar.gz" | sha256sum -c
           sudo tar -xzf /tmp/go.tar.gz -C /usr/local/
-          echo "export PATH=$PATH:/usr/local/go/bin" >> $BASH_ENV
-          echo 'export GOPATH=$HOME/go' >> $BASH_ENV
+          echo "export PATH=$PATH:/usr/local/go/bin" 
+          echo 'export GOPATH=$HOME/go'
           # Download & verify kubectl
           curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.16.2/bin/linux/amd64/kubectl
           echo "3ff48e12f9c768ad548e4221d805281ea28dfcda5c18b3cd1797fe37aee3012e  kubectl" | sha256sum -c

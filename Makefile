@@ -149,8 +149,8 @@ deploy-cert-manager: ## Deploy cert-manager in the configured Kubernetes cluster
 deploy-controller: ## Deploy controller in the configured Kubernetes cluster in ~/.kube/config
 deploy-controller: kustomize-edit-set-image
 	${KUSTOMIZE} build ${KUSTOMIZE_DIRECTORY_TO_DEPLOY} | kubectl apply -f -
-	kubectl --namespace eco-system wait --for=condition=Available --timeout=60s deploy eco-controller-manager
-	kubectl --namespace eco-system wait --for=condition=Available --timeout=60s deploy eco-proxy
+	kubectl --namespace eco-system wait --for=condition=Available --timeout=1000s deploy eco-controller-manager
+	kubectl --namespace eco-system wait --for=condition=Available --timeout=1000s deploy eco-proxy
 
 .PHONY: deploy
 deploy: ## Deploy the operator, including dependencies

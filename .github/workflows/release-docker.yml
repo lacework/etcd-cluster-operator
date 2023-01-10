@@ -13,6 +13,10 @@ jobs:
   e2e:
     runs-on: ubuntu-20.04
     steps:
+      - uses: actions/checkout@v2
+        with:
+          # Need all the history for git describe --tags to work
+          fetch-depth: 0
       - name: Install Go
         run: |
           sudo rm -rf /usr/local/go
@@ -30,7 +34,6 @@ jobs:
           curl -L -o /tmp/kustomize.tar.gz https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v3.5.4/kustomize_v3.5.4_linux_amd64.tar.gz
           echo "5cdeb2af81090ad428e3a94b39779b3e477e2bc946be1fe28714d1ca28502f6a  /tmp/kustomize.tar.gz" | sha256sum -c
           sudo tar -C /usr/local/bin -x -f /tmp/kustomize.tar.gz
-          checkout
           make e2e-kind TEST_PARALLEL_E2E=1 E2E_ARTIFACTS_DIRECTORY=/tmp/etcd-e2e
 #      - uses: actions/checkout@v2
 #        with:

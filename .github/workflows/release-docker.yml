@@ -15,8 +15,8 @@ jobs:
     steps:
       - working_directory: ~/go/src/github.com/lacework/etcd-cluster-operator
       - name: Install Go
-        run: |
-          sudo rm -rf /usr/local/go
+          run: |
+            sudo rm -rf /usr/local/go
 #          curl -sSL "https://dl.google.com/go/go1.14.linux-amd64.tar.gz" -o /tmp/go.tar.gz
 #          echo "08df79b46b0adf498ea9f320a0f23d6ec59e9003660b4c9c1ce8e5e2c6f823ca  /tmp/go.tar.gz" | sha256sum -c
 #          sudo tar -xzf /tmp/go.tar.gz -C /usr/local/

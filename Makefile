@@ -6,7 +6,9 @@ SHELL := bash
 .DEFAULT_GOAL := help
 # The version which will be reported by the --version argument of each binary
 # and which will be used as the Docker image tag
-VERSION ?= $(shell git describe --tags)
+#VERSION ?= $(shell git describe --tags)
+
+VERSION ?= latest
 
 # Set ARGS to specify extra go test arguments
 ARGS ?=
@@ -147,8 +149,8 @@ deploy-cert-manager: ## Deploy cert-manager in the configured Kubernetes cluster
 deploy-controller: ## Deploy controller in the configured Kubernetes cluster in ~/.kube/config
 deploy-controller: kustomize-edit-set-image
 	${KUSTOMIZE} build ${KUSTOMIZE_DIRECTORY_TO_DEPLOY} | kubectl apply -f -
-	kubectl --namespace eco-system wait --for=condition=Available --timeout=60s deploy eco-controller-manager
-	kubectl --namespace eco-system wait --for=condition=Available --timeout=60s deploy eco-proxy
+	kubectl --namespace eco-system wait --for=condition=Available --timeout=1000s deploy eco-controller-manager
+	kubectl --namespace eco-system wait --for=condition=Available --timeout=1000s deploy eco-proxy
 
 .PHONY: deploy
 deploy: ## Deploy the operator, including dependencies
